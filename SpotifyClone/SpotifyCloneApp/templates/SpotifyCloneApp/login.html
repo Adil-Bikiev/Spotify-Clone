@@ -3,18 +3,36 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Вход</title>
-  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}"> <!-- Подключение CSS -->
 </head>
 <body>
   <div class="form-container">
-    <h2>Вход в аккаунт</h2>
+    <h2>Войти в аккаунт</h2>
     <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
+      {% csrf_token %} <!-- Защита от CSRF атак -->
+
+      <!-- Форма входа -->
+      <div class="form-field">
+        <label for="id_username">Имя пользователя</label>
+        <input type="text" id="id_username" name="username" value="{{ form.username.value }}" placeholder="Имя пользователя" required>
+        {% for error in form.username.errors %}
+          <div class="error">{{ error }}</div> <!-- Ошибки для username -->
+        {% endfor %}
+      </div>
+
+      <div class="form-field">
+        <label for="id_password">Пароль</label>
+        <input type="password" id="id_password" name="password" value="{{ form.password.value }}" placeholder="Пароль" required>
+        {% for error in form.password.errors %}
+          <div class="error">{{ error }}</div> <!-- Ошибки для password -->
+        {% endfor %}
+      </div>
+
       <button type="submit">Войти</button>
     </form>
-    <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+    <p>Нет аккаунта? <a href="{% url 'signup' %}">Зарегистрироваться</a></p>
   </div>
 </body>
 </html>

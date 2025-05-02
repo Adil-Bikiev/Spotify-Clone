@@ -3,15 +3,49 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Регистрация</title>
-  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}"> <!-- Подключение CSS -->
 </head>
 <body>
   <div class="form-container">
     <h2>Создать аккаунт</h2>
     <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
+      {% csrf_token %} <!-- Защита от CSRF атак -->
+
+      <!-- Форма регистрации -->
+      <div class="form-field">
+        <label for="id_username">Имя пользователя</label>
+        <input type="text" id="id_username" name="username" value="{{ form.username.value }}" placeholder="Имя пользователя" required>
+        {% for error in form.username.errors %}
+          <div class="error">{{ error }}</div> <!-- Ошибки для username -->
+        {% endfor %}
+      </div>
+
+      <div class="form-field">
+        <label for="id_email">Email</label>
+        <input type="email" id="id_email" name="email" value="{{ form.email.value }}" placeholder="Email" required>
+        {% for error in form.email.errors %}
+          <div class="error">{{ error }}</div> <!-- Ошибки для email -->
+        {% endfor %}
+      </div>
+
+      <div class="form-field">
+        <label for="id_password1">Пароль</label>
+        <input type="password" id="id_password1" name="password1" value="{{ form.password1.value }}" placeholder="Пароль" required>
+        {% for error in form.password1.errors %}
+          <div class="error">{{ error }}</div> <!-- Ошибки для password1 -->
+        {% endfor %}
+      </div>
+
+      <div class="form-field">
+        <label for="id_password2">Повторите пароль</label>
+        <input type="password" id="id_password2" name="password2" value="{{ form.password2.value }}" placeholder="Повторите пароль" required>
+        {% for error in form.password2.errors %}
+          <div class="error">{{ error }}</div> <!-- Ошибки для password2 -->
+        {% endfor %}
+      </div>
+
       <button type="submit">Зарегистрироваться</button>
     </form>
     <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
