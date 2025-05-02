@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Вход</title>
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Вход в аккаунт</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Войти</button>
+    </form>
+    <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+  </div>
+</body>
+</html>
