@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    line-height: 1.6;
+}
+  
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #000;
+    flex-wrap: wrap;
+}
+  
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1DB954;
+}
+  
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+  
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+  
+nav a:hover {
+    color: #1DB954;
+}
+  
+nav .signup {
+    color: #1DB954;
+}
+  
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(to bottom, #1DB954, #121212);
+}
+  
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+  
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+  
+.buttons .btn {
+    display: inline-block;
+    margin: 10px 10px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+  
+.btn-primary {
+    background-color: #1DB954;
+    color: #000;
+}
+  
+.btn-secondary {
+    background-color: #fff;
+    color: #000;
+}
+  
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+  
+  /* Адаптивность под планшеты и телефоны */
+@media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+  
+    .hero h1 {
+      font-size: 2.2rem;
+    }
+  
+    .hero p {
+      font-size: 1rem;
+    }
+  
+    .buttons {
+      flex-direction: column;
+    }
+  
+    .buttons .btn {
+      width: 80%;
+      max-width: 300px;
+    }
+}
+  
+@media (max-width: 480px) {
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+  
+    .hero p {
+      font-size: 0.95rem;
+    }
+  
+    nav ul {
+      align-items: flex-start;
+    }
+}
+  

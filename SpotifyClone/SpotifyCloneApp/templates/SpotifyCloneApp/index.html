@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spotify — Главная</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+  <header>
+    <div class="logo">Spotify</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Премиум</a></li>
+        <li><a href="#">Поддержка</a></li>
+        <li><a href="#">Загрузить</a></li>
+        <li><a href="#">Войти</a></li>
+        <li><a href="#" class="signup">Регистрация</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Слушай музыку бесплатно</h1>
+      <p>Миллионы треков. Без ограничений.</p>
+      <div class="buttons">
+        <a href="#" class="btn btn-primary">Начать</a>
+        <a href="#" class="btn btn-secondary">Войти</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Spotify</p>
+  </footer>
+</body>
+</html>
