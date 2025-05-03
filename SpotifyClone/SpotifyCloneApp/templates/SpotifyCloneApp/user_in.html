@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Добро пожаловать</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header>
+    <div class="logo">Spotify</div>
+    <nav>
+      <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">Плейлисты</a></li>
+        <li><a href="#">Профиль</a></li>
+        <li><a href="{% url 'logout' %}" class="signup">Выйти</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Добро пожаловать, {{ user.username }}!</h1>
+    <p>Вы успешно вошли в систему. Исследуйте музыку, создавайте плейлисты и наслаждайтесь!</p>
+    <div class="buttons">
+      <a href="#" class="btn btn-primary">Моя библиотека</a>
+      <a href="#" class="btn btn-secondary">Настройки</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Spotify Clone. Все права защищены.</p>
+  </footer>
+</body>
+</html>
