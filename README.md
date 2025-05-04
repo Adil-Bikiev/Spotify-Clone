@@ -63,8 +63,6 @@ Whether you're looking to explore top global tracks or dive into the discography
 |  | 
 | ![Home](SpotifyClone/assets/assets10.png) | 
 |  | 
-| ![Home](SpotifyClone/assets/assets11.png) | 
-|  | 
 | ![Home](SpotifyClone/assets/assets12.png) | 
 |  | 
 | ![Home](SpotifyClone/assets/assets13.png) | 
