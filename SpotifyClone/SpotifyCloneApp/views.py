@@ -145,7 +145,7 @@ def top_tracks_view(request):
 def get_audio(query):
     url = "https://spotify-scraper.p.rapidapi.com/v1/track/download/soundcloud"
 
-    querystring = {"track": query}
+    querystring = {"track": query }
 
     headers = {
         "x-rapidapi-key": f"{config('APIKEY')}",
@@ -154,9 +154,30 @@ def get_audio(query):
 
     response = requests.get(url, headers=headers, params=querystring)
 
+    audio_details = []
+
+    if response.status_code == 200:
+        response_data = response.json()
+
+        if "youtubeVideo" in response_data and 'audio' in response_data['youtubeVideo']:
+            audio_list = response_data['youtubeVideo']['audio']
+            if audio_list:
+                first_audio_url = audio_list[0]['url']
+                duration_text = audio_list[0]['durationText']
+
+                audio_details.append(first_audio_url)
+                audio_details.append(duration_text)
+            else:
+                print("Аудио не доступно!")
+        else:
+            print("Нет 'youtubeVideo' или 'audio'!")
+    else:
+        print("Проблема в данных!")
+    return audio_details
 
 @login_required(login_url='login')
 def music(request, pk):
+
     track_id = pk
     url = "https://spotify-scraper.p.rapidapi.com/v1/track/metadata"
 
@@ -175,6 +196,10 @@ def music(request, pk):
         artists_list = data.get("artists", [])
         first_atrist_name = artists_list[0].get("name") if artists_list else "Музыканты не найдены"
 
+        audio_details_query = track_name + first_atrist_name
+        audio_details = get_audio(audio_details_query)
+        audio_url = audio_details[0]
+        duration_text = audio_details[1]
 
         context = {
             'track_name': track_name,
