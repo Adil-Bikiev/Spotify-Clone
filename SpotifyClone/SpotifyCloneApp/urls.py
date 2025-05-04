@@ -9,5 +9,6 @@ urlpatterns = [
     path('user_in/', views.user_in, name='user_in'),
     path('library/', views.library_user, name='library'),
     path('songs/', views.top_tracks_view, name='songs'),
-    path('music/<str:pk>/', views.music, name='music')
+    path('music/<str:pk>/', views.music, name='music'),
+    path('profile/<str:pk>/', views.profile, name='profile'),
 ]

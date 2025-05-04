@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Профиль Артиста</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 20px 40px;
+      background-color: #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      color: #1DB954;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #1DB954;
+    }
+
+    .artist-header {
+      width: 100%;
+      max-height: 300px;
+      overflow: hidden;
+    }
+
+    .artist-header img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .artist-info {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .artist-info h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .artist-info p {
+      font-size: 1.2rem;
+      color: #bbb;
+    }
+
+    .back-btn {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #1DB954;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #17a54a;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      background-color: #000;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .artist-info h1 {
+        font-size: 2rem;
+      }
+      .artist-info p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Spotify Clone</div>
+  <nav>
+    <a href="#">Главная</a>
+    <a href="#">Выйти</a>
+  </nav>
+</header>
+
+<div class="artist-header">
+  <img src="{{ headerUrl }}" alt="Artist Header">
+</div>
+
+<div class="artist-info">
+  <h1>{{ name }}</h1>
+  <p>{{ monthlyListeners }} слушателей в месяц</p>
+
+  <a href="#" class="back-btn">← Назад</a>
+</div>
+
+<footer>
+  &copy; 2025 Spotify Clone. Все права защищены.
+</footer>
+
+</body>
+</html>

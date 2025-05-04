@@ -206,3 +206,34 @@ def music(request, pk):
             'artist_name': first_atrist_name,
         }
     return render(request, 'music.html', context)
+
+@login_required(login_url='login')
+def profile(request, pk):
+    artist_id = pk
+    url = "https://spotify-scraper.p.rapidapi.com/v1/artist/overview"
+
+    querystring = {"artistId": artist_id}
+
+    headers = {
+        "x-rapidapi-key": f"{config('APIKEY')}",
+        "x-rapidapi-host": "spotify-scraper.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    if response.status_code == 200:
+        data = response.json()
+
+        name = data["name"]
+        monthly_listeners = data["stats"]["monthlyListeners"]
+        header_url = data["visuals"]["header"][0]["url"]
+
+        artist_data = {
+            "name": name,
+            "monthlyListeners": monthly_listeners,
+            "headerUrl": header_url,
+        }
+    else:
+        artist_data = {}
+
+    return render(request, 'profile.html')
