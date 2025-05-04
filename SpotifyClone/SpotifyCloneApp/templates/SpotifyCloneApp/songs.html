@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Top Songs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      color: #1DB954;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #1DB954;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(to bottom, #1DB954, #121212);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+    }
+
+    .songs-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      padding: 40px 20px;
+      justify-items: center;
+    }
+
+    .song-card {
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 220px;
+    }
+
+    .song-card:hover {
+      transform: scale(1.05);
+    }
+
+    .cover-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .track-name {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .artist-name {
+      font-size: 0.95rem;
+      color: #bbb;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #000;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .cover-img {
+        height: 160px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .song-card {
+        padding: 15px;
+      }
+
+      .cover-img {
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">Spotify Clone</div>
+  <nav>
+    <ul>
+      <li><a href="{% url 'user_in' %}">Главная</a></li>
+      <li><a href="{% url 'logout' %}">Выйти</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Топ Треки Недели</h1>
+  <p>Самые популярные песни прямо сейчас</p>
+</section>
+
+<section class="songs-container">
+  {% for track in tracks %}
+    <div class="song-card">
+      <img class="cover-img" src="{{ track.cover_url }}" alt="{{ track.name }}">
+      <div class="track-name">{{ track.name }}</div>
+      <div class="artist-name">{{ track.artist }}</div>
+    </div>
+  {% endfor %}
+</section>
+
+<footer>
+  &copy; 2025 Spotify Clone. Все права защищены.
+</footer>
+</body>
+</html>

@@ -98,3 +98,45 @@ def library_user(request):
     }
 
     return render(request, 'SpotifyCloneApp/library.html', context)
+
+
+def top_songs():
+    url = "https://spotify-scraper.p.rapidapi.com/v1/chart/tracks/top"
+
+    querystring = {"type":"weekly"}
+
+    headers = {
+        "x-rapidapi-key": f"{config('APIKEY')}",
+        "x-rapidapi-host": "spotify-scraper.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    data = response.json()
+    track_details = []
+
+    if 'tracks' in data:
+        shortened_data = data['tracks'][:18]
+
+
+        for track in shortened_data:
+            track_id = track['id']
+            track_name = track['name']
+            artist_name = track['artists'][0]['name'] if track['artists'] else None
+            cover_url = track['album']['cover'][0]['url'] if track['album']['cover'] else None
+
+            track_details.append({
+                'id': track_id,
+                'name': track_name,
+                'artist': artist_name,
+                'cover_url': cover_url,
+            })
+
+    else:
+        print('Track not found is response')
+
+    return track_details
+
+def top_tracks_view(request):
+    tracks = top_songs()
+    return render(request, 'SpotifyCloneApp/songs.html', {'tracks': tracks})
