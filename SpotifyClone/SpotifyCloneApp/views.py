@@ -2,7 +2,38 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
+import requests
+from decouple import config
+import os, json
 # Create your views here
+
+def top_artists():
+    url = "https://spotify-scraper.p.rapidapi.com/v1/chart/artists/top"
+
+    querystring = {"type":"weekly"}
+
+    headers = {
+        "x-rapidapi-key": f"{config('APIKEY')}",
+        "x-rapidapi-host": "spotify-scraper.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+    response_data = response.json()
+
+    artists_info = []
+
+    if 'artists' in response_data:
+        for artist in response_data['artists']:
+            name = artist.get('name', 'No Name')
+            avatar_url = artist.get('visuals', {}).get('avatar', [{}])[0].get('url', 'No URL')
+            artist_id = artist.get('id', 'No ID')
+            artists_info.append((name, avatar_url, artist_id))
+
+    print(response.status_code)
+    print(response.text)
+    return artists_info 
+
+
 def index(request):
     return render(request, 'SpotifyCloneApp/index.html')
 
@@ -57,3 +88,13 @@ def user_in(request):
 def logout(request):
     auth.logout(request)
     return redirect('login')
+
+@login_required(login_url='login')
+def library_user(request):
+    artists_info = top_artists()
+    print(artists_info)
+    context = {
+        'artists_info': artists_info,
+    }
+
+    return render(request, 'SpotifyCloneApp/library.html', context)
