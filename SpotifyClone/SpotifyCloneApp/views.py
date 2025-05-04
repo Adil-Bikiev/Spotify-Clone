@@ -142,7 +142,18 @@ def top_tracks_view(request):
     tracks = top_songs()
     return render(request, 'SpotifyCloneApp/songs.html', {'tracks': tracks})
 
-def get_audio():
+def get_audio(query):
+    url = "https://spotify-scraper.p.rapidapi.com/v1/track/download/soundcloud"
+
+    querystring = {"track": query}
+
+    headers = {
+        "x-rapidapi-key": f"{config('APIKEY')}",
+        "x-rapidapi-host": "spotify-scraper.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
 
 @login_required(login_url='login')
 def music(request, pk):
