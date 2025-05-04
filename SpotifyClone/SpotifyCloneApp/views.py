@@ -137,6 +137,36 @@ def top_songs():
 
     return track_details
 
+@login_required(login_url='login')
 def top_tracks_view(request):
     tracks = top_songs()
     return render(request, 'SpotifyCloneApp/songs.html', {'tracks': tracks})
+
+def get_audio():
+
+@login_required(login_url='login')
+def music(request, pk):
+    track_id = pk
+    url = "https://spotify-scraper.p.rapidapi.com/v1/track/metadata"
+
+    querystring = {"trackId": track_id}
+
+    headers = {
+        "x-rapidapi-key": f"{config('APIKEY')}",
+        "x-rapidapi-host": "spotify-scraper.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+    if response.status_code == 200:
+        data = response.json()
+
+        track_name = data.get("name")
+        artists_list = data.get("artists", [])
+        first_atrist_name = artists_list[0].get("name") if artists_list else "Музыканты не найдены"
+
+
+        context = {
+            'track_name': track_name,
+            'artist_name': first_atrist_name,
+        }
+    return render(request, 'music.html', context)
