@@ -237,3 +237,4 @@ def profile(request, pk):
         artist_data = {}
 
     return render(request, 'profile.html')
+
